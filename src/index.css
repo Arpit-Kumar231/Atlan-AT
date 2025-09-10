@@ -1,69 +1,205 @@
 @import "tailwindcss";
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
+@layer base {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    --background: 30 20% 98%;
+    --foreground: 270 15% 12%;
+
+    --card: 30 10% 100%;
+    --card-foreground: 270 15% 12%;
+    --card-hover: 30 15% 97%;
+
+    --popover: 30 10% 100%;
+    --popover-foreground: 270 15% 12%;
+
+    --primary: 263 70% 50%;
+    --primary-foreground: 30 10% 98%;
+    --primary-hover: 263 70% 45%;
+
+    --secondary: 20 80% 88%;
+    --secondary-foreground: 270 15% 12%;
+
+    --muted: 30 10% 94%;
+    --muted-foreground: 270 10% 45%;
+
+    --accent: 174 60% 45%;
+    --accent-foreground: 30 10% 98%;
+
+    --destructive: 350 65% 50%;
+    --destructive-foreground: 30 10% 98%;
+
+    --border: 270 10% 88%;
+    --input: 270 10% 88%;
+    --ring: 263 70% 50%;
+
+    --radius: 1rem;
+
+    --adventure: 340 65% 47%;
+    --relaxation: 210 55% 52%;
+    --social: 35 80% 50%;
+    --food: 25 75% 47%;
+    --entertainment: 280 60% 50%;
+    --wellness: 160 45% 45%;
+
+    --gradient-hero: linear-gradient(135deg, hsl(263 70% 50%), hsl(280 60% 50%), hsl(340 65% 47%));
+    --gradient-soft: linear-gradient(135deg, hsl(20 80% 88%), hsl(30 70% 90%), hsl(40 60% 92%));
+    --gradient-morning: linear-gradient(135deg, hsl(210 55% 92%), hsl(200 60% 88%), hsl(190 50% 85%));
+    --gradient-evening: linear-gradient(135deg, hsl(270 40% 35%), hsl(280 45% 40%), hsl(290 40% 45%));
+    --gradient-glass: linear-gradient(135deg, hsl(0 0% 100% / 0.15), hsl(0 0% 100% / 0.08));
+    --gradient-subtle: linear-gradient(180deg, hsl(30 20% 98%), hsl(30 15% 96%));
+
+    --shadow-sm: 0 2px 8px hsl(270 15% 12% / 0.06);
+    --shadow-md: 0 4px 20px hsl(270 15% 12% / 0.08);
+    --shadow-lg: 0 10px 40px hsl(270 15% 12% / 0.12);
+    --shadow-glow: 0 0 30px hsl(263 70% 50% / 0.25);
+    --shadow-colored: 0 10px 40px -10px hsl(263 70% 50% / 0.35);
+
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --morning-start: 200 45% 92%;
+    --afternoon-start: 40 55% 90%;
+    --evening-start: 280 35% 88%;
+    --night-start: 260 30% 85%;
   }
-  a:hover {
-    color: #747bff;
+
+  .dark {
+    --background: 270 20% 10%;
+    --foreground: 30 10% 95%;
+
+    --card: 270 18% 13%;
+    --card-foreground: 30 10% 95%;
+    --card-hover: 270 18% 16%;
+
+    --popover: 270 18% 13%;
+    --popover-foreground: 30 10% 95%;
+
+    --primary: 263 70% 55%;
+    --primary-foreground: 30 10% 98%;
+    --primary-hover: 263 70% 60%;
+
+    --secondary: 20 60% 30%;
+    --secondary-foreground: 30 10% 95%;
+
+    --muted: 270 15% 25%;
+    --muted-foreground: 30 10% 65%;
+
+    --accent: 174 50% 40%;
+    --accent-foreground: 30 10% 95%;
+
+    --destructive: 350 60% 45%;
+    --destructive-foreground: 30 10% 95%;
+
+    --border: 270 15% 25%;
+    --input: 270 15% 25%;
+    --ring: 263 70% 55%;
+
+    --gradient-glass: linear-gradient(135deg, hsl(0 0% 100% / 0.08), hsl(0 0% 100% / 0.03));
+    --gradient-subtle: linear-gradient(180deg, hsl(270 20% 10%), hsl(270 18% 12%));
   }
-  button {
-    background-color: #f9f9f9;
+}
+
+@layer base {
+  * {
+    @apply border-[hsl(var(--border))];
+  }
+
+  body {
+    @apply bg-[hsl(var(--background))] text-[hsl(var(--foreground))] font-sans antialiased;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-[hsl(var(--muted))]/20;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-[hsl(var(--muted-foreground))]/20 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-[hsl(var(--muted-foreground))]/30;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-[hsl(var(--card))]/60 backdrop-blur-xl border border-[hsl(var(--border))]/40 shadow-lg;
+  }
+
+  .glass-subtle {
+    @apply bg-[hsl(var(--card))]/40 backdrop-blur-md border border-[hsl(var(--border))]/20;
+  }
+
+  .category-adventure {
+    @apply bg-gradient-to-r from-[hsl(var(--adventure))] to-[hsl(var(--adventure))]/80 text-white shadow-sm;
+  }
+  
+  .category-relaxation {
+    @apply bg-gradient-to-r from-[hsl(var(--relaxation))] to-[hsl(var(--relaxation))]/80 text-white shadow-sm;
+  }
+  
+  .category-social {
+    @apply bg-gradient-to-r from-[hsl(var(--social))] to-[hsl(var(--social))]/80 text-white shadow-sm;
+  }
+  
+  .category-food {
+    @apply bg-gradient-to-r from-[hsl(var(--food))] to-[hsl(var(--food))]/80 text-white shadow-sm;
+  }
+  
+  .category-entertainment {
+    @apply bg-gradient-to-r from-[hsl(var(--entertainment))] to-[hsl(var(--entertainment))]/80 text-white shadow-sm;
+  }
+  
+  .category-wellness {
+    @apply bg-gradient-to-r from-[hsl(var(--wellness))] to-[hsl(var(--wellness))]/80 text-white shadow-sm;
+  }
+
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+  
+  .gradient-soft {
+    background: var(--gradient-soft);
+  }
+  
+  .gradient-morning {
+    background: var(--gradient-morning);
+  }
+  
+  .gradient-evening {
+    background: var(--gradient-evening);
+  }
+  
+  .gradient-subtle {
+    background: var(--gradient-subtle);
+  }
+
+  .time-morning {
+    @apply bg-[hsl(var(--morning-start))];
+  }
+  
+  .time-afternoon {
+    @apply bg-[hsl(var(--afternoon-start))];
+  }
+  
+  .time-evening {
+    @apply bg-[hsl(var(--evening-start))];
+  }
+  
+  .time-night {
+    @apply bg-[hsl(var(--night-start))];
+  }
+
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+  }
+
+  .hover-glow {
+    @apply transition-all duration-300 hover:shadow-[var(--shadow-glow)];
   }
 }

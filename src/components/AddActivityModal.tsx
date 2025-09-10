@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Activity } from '@/types/weekend';
+import type { Activity } from '@/types/weekend';
 import { TimeSelector } from './TimeSelector';
 import { addMinutesToTime, isTimeOverlapping } from '@/utils/time';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -30,8 +30,6 @@ export const AddActivityModal = ({
   const getDisabledTimes = (day: 'saturday' | 'sunday'): string[] => {
     const activities = existingActivities[day];
     const disabledTimes: string[] = [];
-    
-    const proposedEnd = addMinutesToTime(selectedTime, activity.duration);
     
     timeSlots.forEach((slot) => {
       const slotEnd = addMinutesToTime(slot.time, activity.duration);
@@ -72,8 +70,8 @@ export const AddActivityModal = ({
                 className={cn(
                   "px-4 py-2 rounded-lg transition-all",
                   selectedDay === 'saturday'
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-muted hover:bg-muted/80"
+                    ? "bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] shadow-md"
+                    : "bg-[hsl(var(--muted))] hover:bg-[hsl(var(--muted))]/80"
                 )}
               >
                 <Calendar className="w-4 h-4 inline mr-2" />
@@ -84,8 +82,8 @@ export const AddActivityModal = ({
                 className={cn(
                   "px-4 py-2 rounded-lg transition-all",
                   selectedDay === 'sunday'
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-muted hover:bg-muted/80"
+                    ? "bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] shadow-md"
+                    : "bg-[hsl(var(--muted))] hover:bg-[hsl(var(--muted))]/80"
                 )}
               >
                 <Calendar className="w-4 h-4 inline mr-2" />
@@ -110,13 +108,13 @@ export const AddActivityModal = ({
         <div className="flex justify-end gap-2">
           <button
             onClick={onClose}
-            className="px-4 py-2 rounded-lg bg-muted hover:bg-muted/80 transition-colors"
+            className="px-4 py-2 rounded-lg bg-[hsl(var(--muted))] hover:bg-[hsl(var(--muted))]/80 transition-colors"
           >
             Cancel
           </button>
           <button
             onClick={handleConfirm}
-            className="px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary-hover transition-colors"
+            className="px-4 py-2 rounded-lg bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] hover:bg-[hsl(var(--primary-hover))] transition-colors"
           >
             Add to Schedule
           </button>

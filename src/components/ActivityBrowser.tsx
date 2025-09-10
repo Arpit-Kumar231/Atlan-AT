@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Activity, ActivityCategory } from '@/types/weekend';
+import type { Activity, ActivityCategory } from '@/types/weekend';
 import { ActivityCard } from './ActivityCard';
 import { Search, Filter } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -59,8 +59,8 @@ export const ActivityBrowser = ({
                 className={cn(
                   "px-4 py-2 rounded-full text-sm font-medium transition-all transform hover:scale-105",
                   selectedCategory === cat.value
-                    ? "bg-primary text-primary-foreground shadow-colored"
-                    : "bg-muted/50 hover:bg-muted/80"
+                    ? "bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] shadow-colored"
+                    : "bg-[hsl(var(--muted))]/50 hover:bg-[hsl(var(--muted))]/80"
                 )}
               >
                 <span className="mr-1.5 text-base">{cat.emoji}</span>

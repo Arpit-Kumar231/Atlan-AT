@@ -1,4 +1,4 @@
-import { Activity } from '@/types/weekend';
+import type { Activity } from '@/types/weekend';
 import { Clock, Plus } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -51,7 +51,7 @@ export const ActivityCard = ({ activity, onAdd, isSelected }: ActivityCardProps)
           <button
             className={cn(
               "p-2 rounded-xl transition-all",
-              "bg-primary/10 hover:bg-primary/20 text-primary",
+              "bg-[hsl(var(--primary))]/10 hover:bg-[hsl(var(--primary))]/20 text-[hsl(var(--primary))]",
               "hover:shadow-md transform hover:scale-105"
             )}
             onClick={(e) => {
