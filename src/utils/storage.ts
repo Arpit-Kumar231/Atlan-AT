@@ -11,7 +11,9 @@ export const saveWeekendPlan = (plan: WeekendPlan): void => {
 
 export const getWeekendPlans = (): WeekendPlan[] => {
   const stored = localStorage.getItem(STORAGE_KEY);
-  if (!stored) return [];
+  if (!stored) {
+    return [];
+  }
   
   try {
     const plans = JSON.parse(stored);
@@ -20,7 +22,8 @@ export const getWeekendPlans = (): WeekendPlan[] => {
       createdAt: new Date(plan.createdAt),
       updatedAt: new Date(plan.updatedAt),
     }));
-  } catch {
+  } catch (error) {
+    console.log('Error parsing plans:', error);
     return [];
   }
 };

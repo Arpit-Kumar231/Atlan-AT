@@ -15,7 +15,7 @@ export interface Activity {
   name: string;
   description: string;
   category: ActivityCategory;
-  duration: number; // in minutes
+  duration: number;
   icon: string;
   suggestedTime?: string;
 }
