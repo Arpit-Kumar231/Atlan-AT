@@ -5,10 +5,11 @@ import { ActivityBrowser } from '@/components/ActivityBrowser';
 import { WeekendSchedule } from '@/components/WeekendSchedule';
 import { ThemeSelector } from '@/components/ThemeSelector';
 import { AddActivityModal } from '@/components/AddActivityModal';
+import { ShareModal } from '@/components/ShareModal';
 import { addMinutesToTime } from '@/utils/time';
 import { saveWeekendPlan } from '@/utils/storage';
 import { useToast } from '@/hooks/use-toast';
-import { Sparkles, Save, RefreshCw, Download } from 'lucide-react';
+import { Sparkles, Save, RefreshCw, Share2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export default function WeekendPlanner() {
@@ -18,21 +19,20 @@ export default function WeekendPlanner() {
   const [sundayActivities, setSundayActivities] = useState<ScheduledActivity[]>([]);
   const [selectedActivity, setSelectedActivity] = useState<Activity | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [planName, setPlanName] = useState('My Perfect Weekend');
 
   useEffect(() => {
     const savedPlan = localStorage.getItem('weekendly_current_plan');
-    console.log('Loading saved plan:', savedPlan);
     if (savedPlan) {
       try {
         const plan = JSON.parse(savedPlan);
-        console.log('Parsed plan:', plan);
         setSaturdayActivities(plan.saturday || []);
         setSundayActivities(plan.sunday || []);
         setWeekendTheme(plan.theme || 'balanced');
         setPlanName(plan.name || 'My Perfect Weekend');
       } catch (error) {
-        console.log('Error loading plan:', error);
+        console.error('Failed to load saved plan:', error);
       }
     }
   }, []);
@@ -48,7 +48,6 @@ export default function WeekendPlanner() {
   }, [planName, weekendTheme, saturdayActivities, sundayActivities]);
 
   const handleAddActivity = (activity: Activity) => {
-    console.log('Adding activity:', activity);
     setSelectedActivity(activity);
     setIsModalOpen(true);
   };
@@ -142,7 +141,6 @@ export default function WeekendPlanner() {
     setWeekendTheme('balanced');
     toast({
       title: 'Plan reset',
-      description: 'Start fresh with a new weekend plan',
     });
   };
 
@@ -183,8 +181,15 @@ export default function WeekendPlanner() {
                 Reset
               </button>
               <button
+                onClick={() => setIsShareModalOpen(true)}
+                className="px-5 py-2.5 rounded-xl bg-white/10 backdrop-blur-md hover:bg-white/20 transition-all flex items-center gap-2 font-medium"
+              >
+                <Share2 className="w-4 h-4" />
+                Share
+              </button>
+              <button
                 onClick={handleSavePlan}
-                className="px-5 py-2.5 rounded-xl bg-white text-primary hover:bg-white/95 transition-all flex items-center gap-2 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105"
+                className="px-5 py-2.5 rounded-xl bg-white  text-black text-primary hover:bg-white/95 transition-all flex items-center gap-2 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105"
               >
                 <Save className="w-4 h-4" />
                 Save Plan
@@ -238,7 +243,6 @@ export default function WeekendPlanner() {
             </div>
           </div>
 
-          {/* Weekend Schedule */}
           <div className="glass rounded-3xl p-8 shadow-xl">
             <h2 className="text-xl font-display font-semibold mb-6 flex items-center gap-2">
               <span className="text-2xl">📅</span>
@@ -268,6 +272,15 @@ export default function WeekendPlanner() {
           }}
         />
       )}
+
+      <ShareModal
+        isOpen={isShareModalOpen}
+        onClose={() => setIsShareModalOpen(false)}
+        planName={planName}
+        theme={weekendTheme}
+        saturday={saturdayActivities}
+        sunday={sundayActivities}
+      />
     </div>
   );
 }
