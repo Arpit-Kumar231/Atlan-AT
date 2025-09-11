@@ -7,6 +7,7 @@ import { useAuth } from "@clerk/clerk-react";
 import Landing from "./pages/Landing";
 import WeekendPlanner from "./pages/WeekendPlanner";
 import NotFound from "./pages/NotFound";
+import { OfflineIndicator } from "./components/OfflineIndicator";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <OfflineIndicator />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Landing />} />
