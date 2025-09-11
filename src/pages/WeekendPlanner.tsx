@@ -9,8 +9,10 @@ import { ShareModal } from '@/components/ShareModal';
 import { addMinutesToTime } from '@/utils/time';
 import { saveWeekendPlan } from '@/utils/storage';
 import { useToast } from '@/hooks/use-toast';
-import { Sparkles, Save, RefreshCw, Share2 } from 'lucide-react';
+import { Sparkles, Save, RefreshCw, Share2, LogOut } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@clerk/clerk-react';
 
 export default function WeekendPlanner() {
   const { toast } = useToast();
@@ -21,6 +23,8 @@ export default function WeekendPlanner() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [planName, setPlanName] = useState('My Perfect Weekend');
+  const { signOut } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const savedPlan = localStorage.getItem('weekendly_current_plan');
@@ -50,6 +54,11 @@ export default function WeekendPlanner() {
   const handleAddActivity = (activity: Activity) => {
     setSelectedActivity(activity);
     setIsModalOpen(true);
+  };
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/');
   };
 
   const handleConfirmAdd = (day: 'saturday' | 'sunday', startTime: string) => {
@@ -193,6 +202,13 @@ export default function WeekendPlanner() {
               >
                 <Save className="w-4 h-4" />
                 Save Plan
+              </button>
+               <button
+                onClick={handleSignOut}
+                className="px-5 py-2.5 rounded-xl bg-red-500/20 backdrop-blur-md hover:bg-red-500/30 transition-all flex items-center gap-2 font-medium text-white border border-red-500/30"
+              >
+                <LogOut className="w-4 h-4" />
+                Sign Out
               </button>
             </div>
           </div>

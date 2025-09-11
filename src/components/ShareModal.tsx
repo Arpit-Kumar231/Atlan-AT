@@ -25,13 +25,17 @@ export function ShareModal({ isOpen, onClose, planName, theme, saturday, sunday 
     setIsGenerating(true);
     try {
       const element = document.getElementById('weekend-poster');
-      if (!element) return;
+      if(!element) return;
+
+      await new Promise(resolve => setTimeout(resolve, 100));
 
       const canvas = await html2canvas(element, {
         scale: 2,
         backgroundColor: '#ffffff',
         logging: false,
         useCORS: true,
+        allowTaint: true,
+        foreignObjectRendering: true,
       });
 
       const pdf = new jsPDF({

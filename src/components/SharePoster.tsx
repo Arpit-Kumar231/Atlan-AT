@@ -1,5 +1,5 @@
 import { ScheduledActivity, WeekendTheme } from '@/types/weekend';
-import { Calendar, MapPin,} from 'lucide-react';
+import { Calendar, MapPin, Clock, Sparkles } from 'lucide-react';
 
 interface SharePosterProps {
   planName: string;
@@ -63,12 +63,10 @@ export function SharePoster({ planName, theme, saturday, sunday }: SharePosterPr
   return (
     <div 
       id="weekend-poster" 
-      className="bg-white rounded-3xl shadow-2xl overflow-hidden"
-      style={{ width: '800px' }}
+      className="bg-white rounded-2xl overflow-hidden"
+      style={{ width: '794px', minHeight: '1123px', padding: '0' }}
     >
-      <div className={`bg-gradient-to-br ${themeColors[theme]} p-8 text-white relative overflow-hidden`}>
-        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl transform translate-x-20 -translate-y-20"></div>
-        <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full blur-2xl transform -translate-x-10 translate-y-10"></div>
+      <div className={`bg-gradient-to-br ${themeColors[theme]} px-12 py-10 text-white relative`}>
         
         <div className="relative z-10">
           <div className="flex items-center justify-between mb-4">
@@ -89,8 +87,8 @@ export function SharePoster({ planName, theme, saturday, sunday }: SharePosterPr
         </div>
       </div>
 
-      <div className="p-8">
-        <div className="grid md:grid-cols-2 gap-8">
+      <div className="px-12 py-10">
+        <div className="grid grid-cols-2 gap-12">
           <div>
             {renderDayActivities(saturday, '🌅 Saturday')}
           </div>
@@ -99,7 +97,16 @@ export function SharePoster({ planName, theme, saturday, sunday }: SharePosterPr
           </div>
         </div>
 
-       
+        <div className="mt-8 pt-6 border-t border-gray-200">
+          <div className="flex items-center justify-end">
+            <div className="flex items-center gap-2">
+              <Clock className="w-3 h-3 text-gray-400" />
+              <span className="text-xs text-gray-500">
+                {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

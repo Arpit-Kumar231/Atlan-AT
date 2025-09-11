@@ -13,9 +13,7 @@ interface ActivityBrowserProps {
 const categories: { value: ActivityCategory | 'all'; label: string; emoji: string }[] = [
   { value: 'all', label: 'All', emoji: '✨' },
   { value: 'adventure', label: 'Adventure', emoji: '🏔️' },
-  { value: 'relaxation', label: 'Relaxation', emoji: '🧘' },
   { value: 'social', label: 'Social', emoji: '👥' },
-  { value: 'food', label: 'Food', emoji: '🍽️' },
   { value: 'entertainment', label: 'Entertainment', emoji: '🎭' },
   { value: 'wellness', label: 'Wellness', emoji: '💚' },
 ];

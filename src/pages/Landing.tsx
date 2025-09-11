@@ -34,7 +34,7 @@ export default function Landing() {
                 </Button>
               </SignInButton>
               <SignUpButton mode="modal">
-                <Button size="sm" className="bg-gradient-primary text-white border-0 hover:opacity-90">
+                <Button size="sm" className="bg-gradient-secondary text-black border-0 hover:opacity-90">
                   Get Started
                 </Button>
               </SignUpButton>
@@ -47,13 +47,13 @@ export default function Landing() {
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
             Your Perfect Weekend
-            <span className="block bg-gradient-primary bg-clip-text text-transparent">
+            <span className="block bg-gradient-primary bg-clip-text text-black">
               Starts Here
             </span>
           </h1>
           
           <SignUpButton mode="modal">
-            <Button size="lg" className="bg-gradient-primary text-white border-0 hover:opacity-90 group">
+            <Button size="lg" className="bg-gradient-primary text-black border hover:opacity-90 group">
               Go to Weekend Planner
               <ChevronRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
