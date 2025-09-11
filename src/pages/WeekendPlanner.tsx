@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Activity, ScheduledActivity, WeekendTheme, ActivityMood } from '@/types/weekend';
+import type { Activity, ScheduledActivity, WeekendTheme, ActivityMood } from '@/types/weekend';
 import { activities } from '@/data/activities';
 import { ActivityBrowser } from '@/components/ActivityBrowser';
 import { WeekendSchedule } from '@/components/WeekendSchedule';
@@ -10,7 +10,6 @@ import { addMinutesToTime } from '@/utils/time';
 import { saveWeekendPlan } from '@/utils/storage';
 import { useToast } from '@/hooks/use-toast';
 import { Sparkles, Save, RefreshCw, Share2, LogOut } from 'lucide-react';
-import { cn } from '@/lib/utils';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@clerk/clerk-react';
 
@@ -36,7 +35,7 @@ export default function WeekendPlanner() {
         setWeekendTheme(plan.theme || 'balanced');
         setPlanName(plan.name || 'My Perfect Weekend');
       } catch (error) {
-        console.error('Failed to load saved plan:', error);
+        console.log(error);
       }
     }
   }, []);

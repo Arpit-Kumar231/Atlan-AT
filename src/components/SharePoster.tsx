@@ -15,12 +15,7 @@ const themeEmojis = {
   balanced: '✨'
 };
 
-const themeColors = {
-  lazy: 'from-purple-600 to-pink-600',
-  adventure: 'from-orange-500 to-red-600',
-  social: 'from-blue-500 to-purple-600',
-  balanced: 'from-purple-600 to-indigo-600'
-};
+
 
 export function SharePoster({ planName, theme, saturday, sunday }: SharePosterProps) {
   const formatTime = (time: string) => {
@@ -32,63 +27,145 @@ export function SharePoster({ planName, theme, saturday, sunday }: SharePosterPr
   };
 
   const renderDayActivities = (activities: ScheduledActivity[], dayName: string) => (
-    <div className="space-y-3">
-      <h3 className="text-lg font-bold text-gray-800 border-b border-gray-200 pb-2">
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+      <h3 style={{ 
+        fontSize: '18px', 
+        fontWeight: 'bold', 
+        color: '#1f2937',
+        borderBottom: '1px solid #e5e7eb',
+        paddingBottom: '8px',
+        margin: '0'
+      }}>
         {dayName}
       </h3>
       {activities.length > 0 ? (
-        <div className="space-y-2">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           {activities.map((activity) => (
-            <div key={activity.scheduledId} className="flex gap-3 items-start">
-              <div className="text-sm font-medium text-purple-700 whitespace-nowrap">
+            <div key={activity.scheduledId} style={{ 
+              display: 'flex', 
+              gap: '12px', 
+              alignItems: 'flex-start' 
+            }}>
+              <div style={{ 
+                fontSize: '14px', 
+                fontWeight: '500', 
+                color: '#7c3aed',
+                whiteSpace: 'nowrap',
+                minWidth: '80px'
+              }}>
                 {formatTime(activity.startTime)}
               </div>
-              <div className="flex-1">
-                <div className="flex items-center gap-2">
-                  <span className="text-lg">{activity.icon}</span>
-                  <span className="font-medium text-gray-800">{activity.name}</span>
+              <div style={{ flex: 1 }}>
+                <div style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '8px' 
+                }}>
+                  <span style={{ fontSize: '18px' }}>{activity.icon}</span>
+                  <span style={{ 
+                    fontWeight: '500', 
+                    color: '#1f2937' 
+                  }}>
+                    {activity.name}
+                  </span>
                   {activity.mood && <span>{activity.mood}</span>}
                 </div>
-                <p className="text-xs text-gray-600 mt-0.5">{activity.description}</p>
+                <p style={{ 
+                  fontSize: '12px', 
+                  color: '#4b5563', 
+                  marginTop: '2px',
+                  margin: '2px 0 0 0'
+                }}>
+                  {activity.description}
+                </p>
               </div>
             </div>
           ))}
         </div>
       ) : (
-        <p className="text-gray-500 italic text-sm">No activities planned</p>
+        <p style={{ 
+          color: '#6b7280', 
+          fontStyle: 'italic', 
+          fontSize: '14px',
+          margin: '0'
+        }}>
+          No activities planned
+        </p>
       )}
     </div>
   );
 
+  const getGradientStyle = (theme: WeekendTheme) => {
+    const gradients = {
+      lazy: 'linear-gradient(135deg, #9333ea 0%, #db2777 100%)',
+      adventure: 'linear-gradient(135deg, #f97316 0%, #dc2626 100%)',
+      social: 'linear-gradient(135deg, #3b82f6 0%, #9333ea 100%)',
+      balanced: 'linear-gradient(135deg, #9333ea 0%, #4f46e5 100%)'
+    };
+    return gradients[theme];
+  };
+
   return (
     <div 
       id="weekend-poster" 
-      className="bg-white rounded-2xl overflow-hidden"
-      style={{ width: '794px', minHeight: '1123px', padding: '0' }}
+      style={{ 
+        width: '794px', 
+        minHeight: '1123px', 
+        backgroundColor: '#ffffff',
+        borderRadius: '16px',
+        overflow: 'hidden',
+        fontFamily: 'system-ui, -apple-system, sans-serif'
+      }}
     >
-      <div className={`bg-gradient-to-br ${themeColors[theme]} px-12 py-10 text-white relative`}>
-        
-        <div className="relative z-10">
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-4xl">{themeEmojis[theme]}</span>
+      <div style={{
+        background: getGradientStyle(theme),
+        padding: '40px 48px',
+        color: 'white',
+        position: 'relative'
+      }}>
+        <div style={{ position: 'relative', zIndex: 10 }}>
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'space-between', 
+            marginBottom: '16px' 
+          }}>
+            <span style={{ fontSize: '36px' }}>{themeEmojis[theme]}</span>
           </div>
           
-          <h1 className="text-4xl font-bold mb-2">{planName}</h1>
-          <div className="flex items-center gap-4 text-white/90">
-            <div className="flex items-center gap-1">
-              <Calendar className="w-4 h-4" />
-              <span className="text-sm">Weekend Plan</span>
+          <h1 style={{ 
+            fontSize: '36px', 
+            fontWeight: 'bold', 
+            marginBottom: '8px',
+            margin: '0 0 8px 0'
+          }}>
+            {planName}
+          </h1>
+          
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '16px',
+            color: 'rgba(255, 255, 255, 0.9)'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <span style={{ fontSize: '14px' }}>📅</span>
+              <span style={{ fontSize: '14px' }}>Weekend Plan</span>
             </div>
-            <div className="flex items-center gap-1">
-              <MapPin className="w-4 h-4" />
-              <span className="text-sm capitalize">{theme} Weekend</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <span style={{ fontSize: '14px' }}>📍</span>
+              <span style={{ fontSize: '14px', textTransform: 'capitalize' }}>{theme} Weekend</span>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="px-12 py-10">
-        <div className="grid grid-cols-2 gap-12">
+      <div style={{ padding: '40px 48px' }}>
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: '1fr 1fr', 
+          gap: '48px' 
+        }}>
           <div>
             {renderDayActivities(saturday, '🌅 Saturday')}
           </div>
@@ -97,11 +174,26 @@ export function SharePoster({ planName, theme, saturday, sunday }: SharePosterPr
           </div>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-gray-200">
-          <div className="flex items-center justify-end">
-            <div className="flex items-center gap-2">
-              <Clock className="w-3 h-3 text-gray-400" />
-              <span className="text-xs text-gray-500">
+        <div style={{ 
+          marginTop: '32px', 
+          paddingTop: '24px', 
+          borderTop: '1px solid #e5e7eb' 
+        }}>
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'flex-end' 
+          }}>
+            <div style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '8px' 
+            }}>
+              <span style={{ fontSize: '12px' }}>🕐</span>
+              <span style={{ 
+                fontSize: '12px', 
+                color: '#6b7280' 
+              }}>
                 {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
               </span>
             </div>
