@@ -170,21 +170,41 @@ export function ShareModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-[900px] max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-[900px] max-h-[90vh] overflow-y-auto bg-gray-100">
         <DialogHeader>
           <DialogTitle className="text-2xl font-display">Export Weekend Plan</DialogTitle>
         </DialogHeader>
+        <div className="flex justify-center">
+            <Button
+              size="lg"
+              onClick={handleDownloadPDF}
+              disabled={isGenerating}
+              className="bg-gradient-primary hover:opacity-90 text-white border-0"
+            >
+              {isGenerating ? (
+                <div className='text-black flex gap-2'>
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  Generating PDF...
+                </div>
+              ) : (
+                <div className='text-black  flex gap-2'>
+                  <FileDown className="w-4 h-4 mr-2" />
+                  Download as PDF
+                </div>
+              )}
+            </Button>
+          </div>
 
-        <div className="space-y-6">
-          <div className="flex justify-center p-4 bg-gradient-subtle rounded-2xl">
+        <div className="space-y-2">
+          <div className="flex justify-center p-2 bg-gradient-subtle rounded-2xl">
             <div 
               ref={posterRef} 
               id="weekend-poster" 
-              className="transform scale-75 origin-top"
+              className="transform scale-100 origin-top"
               style={{ 
                 minWidth: '794px', 
                 minHeight: '1123px',
-                transform: 'scale(0.75)',
+                transform: 'scale(1)',
                 transformOrigin: 'top center'
               }}
             >
@@ -197,26 +217,7 @@ export function ShareModal({
             </div>
           </div>
 
-          <div className="flex justify-center">
-            <Button
-              size="lg"
-              onClick={handleDownloadPDF}
-              disabled={isGenerating}
-              className="bg-gradient-primary hover:opacity-90 text-white border-0"
-            >
-              {isGenerating ? (
-                <>
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Generating PDF...
-                </>
-              ) : (
-                <>
-                  <FileDown className="w-4 h-4 mr-2" />
-                  Download as PDF
-                </>
-              )}
-            </Button>
-          </div>
+          
 
           <p className="text-center text-sm text-muted-foreground">
             Export your weekend plan as a PDF document
