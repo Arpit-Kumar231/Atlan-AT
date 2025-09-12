@@ -13,3 +13,4 @@ describe('addMinutesToTime', () => {
     expect(addMinutesToTime('23:59', 1)).toBe('00:00')
   })
 })
+
