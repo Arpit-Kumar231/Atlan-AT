@@ -1,6 +1,7 @@
 # Weekend Planner App
 
 A modern React application for planning weekend activities, built with TypeScript, Vite, and Tailwind CSS.
+You might find a Key in main.tsx that has been put there without use of env because it is a publishable key only used for authetication flows
 
 ## Features
 
